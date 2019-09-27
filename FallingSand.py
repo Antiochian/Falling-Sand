@@ -83,7 +83,9 @@ while True:
     if pressed_keys[52]:
         pensize = 2
         ActiveElement = Acid
-
+    if pressed_keys[53]:
+        pensize = 2
+        ActiveElement = Plant
     #update screen
     window.blit(SURFACE, (0,0))
     for element in list(allelements.keys()):

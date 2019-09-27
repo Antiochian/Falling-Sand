@@ -93,6 +93,54 @@ class Particle:
             changed[(newx,newy)] = True
             return True
         return False #otherwise return "failed" boolean
+
+class Plant(Particle):
+    def __init__(self,x,y,allelements,SURFACE):
+        self.growprogress = 0 #starts off at zero
+        self.fertile = False
+        self.type = "solid"
+        self.color = green
+        Particle.__init__(self,x,y,allelements,SURFACE) 
+        self.draw(self.x, self.y,self.color)
+    def searchfertile(self,x,y):
+        #DEBUG code which just checks for purple color
+        if self.targetcolor(x,y) == magenta:
+            return True
+        else:
+            return False
+        
+        
+    def update(self):
+        """
+        Plants act as a flammable solid, and grow upwards if they have at least FIVE drops of water nearby.
+        If plant cannot grow because it is already grown, then it propogates its fertileness upwards
+        """
+        growchance = 0.5
+        diechance = 0.002
+        absorbchance = 0.2
+        if self.growprogress == 0 and random.random()<diechance: #small chance to die without water
+            self.draw(self.x,self.y,aircolor)
+            del self.allelements[(self.x,self.y)]
+        if self.growprogress >= 10:
+            if not self.fertile:
+                self.growprogress = 0
+                self.fertile = True
+                self.draw(self.x,self.y,magenta) #debug growcode
+                return
+            #GROWCODE goes in here
+        #search for nearby water, can only grow once every 5 ticks at maximum
+        for x in range(self.x - 2, self.x + 2):
+            for y in range(self.y - 3, self.y + 3):
+                if self.targetcolor(x,y) == blue and random.random() < growchance:
+                    self.growprogress +=1
+                    if random.random() < absorbchance:
+                        self.draw(x,y,aircolor) #delete pixel
+                        del self.allelements[(x,y)]
+                        return
+                if self.targetcolor(x,y) == magenta:
+                        self.growprogress += 1
+                    
+        return
         
 class Metal(Particle): #metal just sits there and doesnt move
     def __init__(self,x,y,allelements,SURFACE):
