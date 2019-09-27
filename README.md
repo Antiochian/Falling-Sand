@@ -13,6 +13,7 @@ Not-yet Implemented Features:
 - More elements: Wood, Fire, TNT, gases
 - Unique interactions between elements (Eg: sand becoming wet if it touches water, wood burning if it touches fire)
 - visible user interface
+- Liquids / gases mixing together
 
 Known Bugs:
 - Drawing is choppy and lines often have gaps in them
