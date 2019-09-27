@@ -41,14 +41,15 @@ SURFACE = window.copy() #SURFACE is where all the magic will happen
 ##    for y in range(24,26):
 ##        allelements[(x,y)] = Water(x,y,allelements,SURFACE)
 #    #SURFACE.fill((255,255,255), pygame.Rect(x*scale, y*scale, scale, scale))
-#for x in range(70,150): #build testing bucket
-#    y = 150
-#    allelements[(x,y)] = Metal(x,y,allelements,SURFACE)
-#    allelements[(x,y+1)] = Metal(x,y+1,allelements,SURFACE)
-#for y in range(138,150):
-#    if y in range(145,150):
-#        allelements[(70,y)] = Metal(70,y,allelements,SURFACE)
-#    allelements[(149,y)] = Metal(149,y,allelements,SURFACE)
+for x in range(70,150): #build testing bucket
+    y = 150
+    allelements[(x,y)] = Metal(x,y,allelements,SURFACE)
+    allelements[(x,y+1)] = Metal(x,y+1,allelements,SURFACE)
+for y in range(138,150):
+    if y in range(145,150):
+        allelements[(70,y)] = Metal(70,y,allelements,SURFACE)
+        allelements[(80,y)] = Metal(80,y,allelements,SURFACE)
+    allelements[(149,y)] = Metal(149,y,allelements,SURFACE)
     
 ##########################
 window.blit(SURFACE, (0,0))
@@ -56,6 +57,9 @@ clock = pygame.time.Clock()
 pygame.display.update()
 ActiveElement = Metal #default
 pensize = 1
+
+#INITIALISE NULLELEMENT
+allelements[(None,None)]= NullElement(allelements,SURFACE)
 while True:
     changed = {}
     clock.tick(FPS)
@@ -79,6 +83,7 @@ while True:
     if pressed_keys[52]:
         pensize = 2
         ActiveElement = Acid
+
     #update screen
     window.blit(SURFACE, (0,0))
     for element in list(allelements.keys()):
