@@ -1,7 +1,7 @@
 # Falling-Sand
 A python imitation of the original Falling Sand game
 
-This project is still in an ALPHA phase and is a *work in progress*
+This project is still in an ALPHA phase and is a *work in progress*. You can look at the "experimental" phase to play with half-implemented or buggy features.
 
 Implemented Features:
 - 4 element types: Metal, Water, Sand + Acid, each with their own physics
